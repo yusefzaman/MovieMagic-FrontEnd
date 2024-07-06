@@ -76,5 +76,4 @@
 ### **_Credits_**
 
 ##### This project wouldn't be possible without the incredible educators who poured their heart and soul into the SEI-9 class. Their dedication transformed these students from their initial foundation to becoming capable software engineers. It's a true testament to the power of passionate educators and the impact they can have on their students' lives.
-
 ---
