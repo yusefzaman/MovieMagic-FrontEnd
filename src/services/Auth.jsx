@@ -19,4 +19,9 @@ export const login = async (email, password) => {
     },
     body: JSON.stringify({ email, password })
   })
+  const data = await response.json()
+  if (data.success) {
+    localStorage.setItem('user', JSON.stringify(data.user))
+  }
+  return data
 }
