@@ -16,6 +16,28 @@ const Login = () => {
       setError('Inaccurate Email or password')
     }
   }
-  return <div className="login"></div>
+  return (
+    <div className="login">
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          required
+        />
+        {error && <p>{error}</p>}
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  )
 }
 export default Login
