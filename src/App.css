@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  max-width: 1280px; 
   margin: 0 auto;
   text-align: center;
 }
@@ -96,6 +96,13 @@ nav a {
 
 }
 
+.showTime-grid{
+  display: grid;
+  grid-template-columns: 1f;
+  color:black;
+  font-weight: bold;
+}
+
 .movie-card {
   border: 4px solid rgb(63, 62, 62);
   box-shadow: 15px 10px 15px rgb(65, 45, 45);
@@ -108,13 +115,32 @@ nav a {
   color: rgb(80, 76, 76);
 }
 
+.theatre-card {
+  border: 4px solid rgb(63, 62, 62);
+  box-shadow: 15px 10px 15px rgb(65, 45, 45);
+  width: 90%;
+  height: 80vh;
+  border-radius: 6px;
+  background-size: cover;
+  background-color: rgb(177, 166, 166);
+  padding: 1.5vh;
+  color: rgb(80, 76, 76);
+}
+
+img {
+  height: 60vh ;
+  width: 55vh;
+  margin: 5px;
+  margin-top: 10px;
+  border-radius: 12px;
+}
+
 .container-container {
   display: grid;
   color: white;
   font-weight: bold;
 }
 
-/* About.css */
 .about-container {
   display: flex;
   justify-content: center;

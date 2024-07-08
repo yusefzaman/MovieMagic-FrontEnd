@@ -27,7 +27,7 @@ const Movie = () => {
   }
 
   return (
-    <div className="Movies">
+    <div>
       <h2>Movies List</h2>
       <section className="container-grid">
         {movies.map((movie) => (
@@ -38,7 +38,7 @@ const Movie = () => {
           </div>
         ))}
       </section>
-    </div>
+      </div>
   )
 }
 export default Movie
