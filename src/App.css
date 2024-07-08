@@ -87,7 +87,6 @@ nav a {
   margin-top: 1.75vh;
 }
 
-
 .container-grid{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -145,7 +144,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 80vh;
   background: linear-gradient(135deg, #1f1c2c, #928dab);
   color: #fff;
   padding: 20px;
@@ -153,7 +152,7 @@ img {
 
 .about-content {
   text-align: center;
-  max-width: 600px;
+  max-width: 900px;
   background: rgba(0, 0, 0, 0.7);
   padding: 40px;
   border-radius: 10px;
@@ -193,4 +192,47 @@ img {
   .about-description {
     font-size: 0.9em;
   }
+}
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100vh;
+  height: 100vh;
+  padding: 20px;
+}
+
+.content-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-signin {
+  margin-bottom: 20px;
+}
+
+.video {
+  width: 70vh;
+  height: 80%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  padding: 10px 30px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+  background-color: royalblue;
+  border: #ff0000 3px solid;
+}
+
+.user-details {
+  flex: 1;
+  margin-left: 20px;
+  border-left: 1px solid #ddd;
+  padding-left: 20px;
 }
