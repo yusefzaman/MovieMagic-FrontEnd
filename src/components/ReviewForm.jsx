@@ -26,4 +26,27 @@ const ReviewForm = ({ movieId, userId, onReviewSubmitted }) => {
       setRating('')
     }
   }
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Rating:</label>
+        <input
+          type="number"
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label>Comment:</label>
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit">Submit Review</button>
+    </form>
+  )
 }
+export default ReviewForm
