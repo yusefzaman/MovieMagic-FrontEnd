@@ -27,9 +27,11 @@ const Theatre = () => {
 
       <section className="showTime-grid">
         {theatres.map((theatre) => (
-          <div key={theatre.id} className="movie-card">
-            <h3>Name: {theatre.name}</h3>
-            <p>genre: {theatre.location}</p>
+          <div key={theatre.id} className="theatre-card">
+            <h3>Theatre Name: {theatre.name}</h3>
+            <p>Location: {theatre.location}</p>
+            <p>Showing Time: {theatre.time}</p>
+
           </div>
         ))}
       </section>
