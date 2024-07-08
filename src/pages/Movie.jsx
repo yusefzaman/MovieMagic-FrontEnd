@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const Movie = () => {
   const [movies, setMovies] = useState([])
@@ -32,7 +33,7 @@ const Movie = () => {
       <section className="container-grid">
         {movies.map((movie) => (
           <div key={movie.id} className="movie-card">
-            <img src={movie.img} alt={movie.name} />
+          <Link to = {`/theatres`} ><img src={movie.img} alt={movie.name} /></Link>
             <h3>Name: {movie.name}</h3>
             <p>genre: {movie.genre}</p>
           </div>
