@@ -4,15 +4,14 @@ import { useParams } from 'react-router-dom';
 
 const Movie = () => {
     const [movies, setMovies] = useState([])
-    const {id} = useParams()
 
     useEffect (() => {
     getMovies()
-    }, [id])
+    }, [])
 
    const getMovies = async () => {
     try {
-        const response = await axios.get(`http://localhost:5000/users`)
+        const response = await axios.get(`http://localhost:5000/movies/movies`)
         console.log(response.data);
         setMovies(response.data)
       } catch (error) {
@@ -29,7 +28,7 @@ const Movie = () => {
     };
     
     return( 
-        
+
     <div className="Movies">
         <h2>Movies List</h2>
         <section className="container-grid">
