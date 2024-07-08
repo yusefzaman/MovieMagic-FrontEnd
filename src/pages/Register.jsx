@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { register } from '../services/Auth'
 
-const Register = ({ history }) => {
+import Form from '../components/Form'
+
+const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -9,41 +10,44 @@ const Register = ({ history }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault()
-    const response = await register(name, email, password)
+
+    const response = { success: true, message: 'Registration successful' }
     setMessage(response.message)
     if (response.success) {
       history.push('/signin')
     }
   }
 
+  const fields = [
+    {
+      label: 'Name',
+      type: 'text',
+      value: name,
+      onChange: (e) => setName(e.target.value)
+    },
+    {
+      label: 'Email',
+      type: 'email',
+      value: email,
+      onChange: (e) => setEmail(e.target.value)
+    },
+    {
+      label: 'Password',
+      type: 'password',
+      value: password,
+      onChange: (e) => setPassword(e.target.value)
+    }
+  ]
+
   return (
-    <div>
+    <div className="register-container">
       <h2>Register</h2>
-      <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Register</button>
-      </form>
-      {message && <p>{message}</p>}
+      <Form
+        fields={fields}
+        onSubmit={handleRegister}
+        buttonText="Register"
+        message={message}
+      />
     </div>
   )
 }

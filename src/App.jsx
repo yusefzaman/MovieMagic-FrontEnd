@@ -20,8 +20,8 @@ const App = () => {
           <Route path="/movies" element={<Movie />} />
           <Route path="/movies/:id/theatres" element={<Theatre />} />
           <Route path="/Seats" element={<ShowTime />} />
-          <Route path="/signin" component={SignIn} />
-          <Route path="/register" component={Register} />
+          <Route path="/signin" element={SignIn} />
+          <Route path="/register" element={Register} />
         </Routes>
       </main>
       </div>
