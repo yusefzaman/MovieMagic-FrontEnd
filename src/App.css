@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   text-align: center;
 }
@@ -102,7 +102,7 @@ nav a {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 80vh;
   background: linear-gradient(135deg, #1f1c2c, #928dab);
   color: #fff;
   padding: 20px;
@@ -110,7 +110,7 @@ nav a {
 
 .about-content {
   text-align: center;
-  max-width: 600px;
+  max-width: 900px;
   background: rgba(0, 0, 0, 0.7);
   padding: 40px;
   border-radius: 10px;
@@ -154,6 +154,8 @@ nav a {
 .home-container {
   display: flex;
   justify-content: space-between;
+  width: 100vh;
+  height: 100vh;
   padding: 20px;
 }
 
@@ -168,8 +170,8 @@ nav a {
 }
 
 .video {
-  width: 100%;
-  height: 315px;
+  width: 70vh;
+  height: 80%;
 }
 
 .button-container {
@@ -178,9 +180,12 @@ nav a {
 }
 
 .button {
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 10px 30px;
+  font-size: 30px;
+  color: #fff;
   cursor: pointer;
+  background-color: royalblue;
+  border: #ff0000 3px solid;
 }
 
 .user-details {
