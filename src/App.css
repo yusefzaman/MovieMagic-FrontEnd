@@ -80,13 +80,6 @@ nav a {
   grid-template-columns: 1fr 1fr;
 }
 
-.video {
-  height: 48vh;
-  width: 90vh;
-  margin-left: 55vh;
-  margin-top: 1.75vh;
-}
-
 .movie-card {
   border: 4px solid rgb(63, 62, 62);
   box-shadow: 15px 10px 15px rgb(65, 45, 45);
@@ -105,7 +98,6 @@ nav a {
   font-weight: bold;
 }
 
-/* About.css */
 .about-container {
   display: flex;
   justify-content: center;
@@ -158,4 +150,42 @@ nav a {
   .about-description {
     font-size: 0.9em;
   }
+}
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.content-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-signin {
+  margin-bottom: 20px;
+}
+
+.video {
+  width: 100%;
+  height: 315px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.user-details {
+  flex: 1;
+  margin-left: 20px;
+  border-left: 1px solid #ddd;
+  padding-left: 20px;
 }
