@@ -28,11 +28,11 @@ const Register = () => {
   return (
     <div className="register">
       <div className="registerCard">
-        <form c onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
             <label htmlFor="name">Name</label>
             <input
-              onChange={(e) => setName(e.target.value)}
+              onChange={(event) => setName(event.target.value)}
               name="name"
               type="text"
               placeholder="John Smith"
@@ -43,7 +43,7 @@ const Register = () => {
           <div className="input-wrapper">
             <label htmlFor="email">Email</label>
             <input
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
               name="email"
               type="email"
               placeholder="example@example.com"
