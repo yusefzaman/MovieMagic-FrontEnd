@@ -7,6 +7,7 @@ import Movie from './pages/Movie'
 import Theatre from './pages/Theatre'
 import ShowTime from './pages/ShowTime'
 import Register from './pages/Register'
+import Login from './pages/Login'
 const App = () => {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/theatres" element={<Theatre />} />
           <Route path="/Seats" element={<ShowTime />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </main>
     </div>
