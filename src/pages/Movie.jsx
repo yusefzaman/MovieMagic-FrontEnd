@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 
 const Movie = () => {
   const [movies, setMovies] = useState([])
@@ -11,7 +10,7 @@ const Movie = () => {
 
   const getMovies = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/movies/movies`)
+      const response = await axios.get(`http://localhost:5000/movies`)
       console.log(response.data)
       setMovies(response.data)
     } catch (error) {
@@ -32,10 +31,10 @@ const Movie = () => {
       <h2>Movies List</h2>
       <section className="container-grid">
         {movies.map((movie) => (
-          <div key={movie._id} className="movie-card">
+          <div key={movie.id} className="movie-card">
             <img src={movie.img} alt={movie.name} />
             <h3>Name: {movie.name}</h3>
-            <p>Location: {movie.location}</p>
+            <p>genre: {movie.genre}</p>
           </div>
         ))}
       </section>
