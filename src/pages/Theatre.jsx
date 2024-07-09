@@ -25,12 +25,15 @@ const Theatre = () => {
     <div className="Theatres">
       <h2>Movies Details</h2>
 
-      <section className="container-container">
-        <div key={theatres._id} className="Detailcard">
-          <img src={theatres.img} alt={theatres.title} />
-          <h3>{theatres.title}</h3>
-          <p>{theatres.time}</p>
-        </div>
+      <section className="showTime-grid">
+        {theatres.map((theatre) => (
+          <div key={theatre.id} className="theatre-card">
+            <h3>Theatre Name: {theatre.name}</h3>
+            <p>Location: {theatre.location}</p>
+            <p>Showing Time: {theatre.time}</p>
+
+          </div>
+        ))}
       </section>
     </div>
   )
