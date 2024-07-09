@@ -11,7 +11,7 @@ const Movie = () => {
 
   const getMovies = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:5000/movies`)
+      const response = await axios.get(`http://localhost:5000/movies`)
       console.log(response.data)
       setMovies(response.data)
     } catch (error) {
@@ -19,24 +19,27 @@ const Movie = () => {
     }
   }
 
+  const handleChange = (event) => {
+    setForm({ ...form, [event.target.id]: event.target.value })
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+  }
+
   return (
-    <div className="movies-container">
+    <div>
       <h2>Movies List</h2>
       <section className="container-grid">
         {movies.map((movie) => (
           <div key={movie.id} className="movie-card">
-            <Link to={`/theatres`}>
-              <img src={movie.img} alt={movie.name} className="movie-image" />
-            </Link>
-            <div className="movie-details">
-              <h3>{movie.name}</h3>
-              <p>Genre: {movie.genre}</p>
-            </div>
+          <Link to = {`${encodeURIComponent(movie.name)}/theatres`} ><img src={movie.img} alt={movie.name} /></Link>
+            <h3>Name: {movie.name}</h3>
+            <p>genre: {movie.genre}</p>
           </div>
         ))}
       </section>
-    </div>
+      </div>
   )
 }
-
 export default Movie

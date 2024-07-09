@@ -289,4 +289,24 @@ h2 {
   margin: 0;
   font-size: 14px;
   color: #bbb;
+
 }
+
+ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+li {
+  border: #141e30 3px solid;
+  list-style-type: none;
+  padding:0.25rem;
+}
+li:hover{
+  transition: 1.5s;
+  background-color: darkblue;
+}
+
+}
+
