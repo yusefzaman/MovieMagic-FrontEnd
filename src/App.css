@@ -1,12 +1,19 @@
 body {
   background: linear-gradient(to right, #141e30, #243b55);
-  color: #fff;
+   
+ color: #fff;
   font-family: monospace, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+input:focus{
+  color: white;
+  background-color: darkblue;
+  transition: 1.5s;
+  font-family: monospace;
+  font-weight: 900;
+}
 .home-container {
   display: flex;
   justify-content: space-between;
@@ -59,7 +66,7 @@ body {
   margin-top: 30px;
 }
 
-.button {
+.button,button {
   padding: 10px 30px;
   font-size: 23px;
   color: #fff;
@@ -69,8 +76,11 @@ body {
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
-
-.button:hover {
+button{
+  padding: 5px;
+  font-size: 1rem;
+}
+.button:hover,button:hover {
   background-color: darkblue;
   transition: 1.5s;
 }
