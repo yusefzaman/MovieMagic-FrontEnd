@@ -101,11 +101,26 @@ header {
   font-weight: bold;
   color: #fff;
 }
-
+.genre{
+  background-color: black;
+  padding: 1rem;
+  
+}
+.genre:hover{
+  border-radius: 2rem;
+  box-shadow: 1rem 1rem 1rem black;
+  transition: 1.6s;
+  color: green;
+}
+.movieName:hover{
+color: royalblue;
+transition: 1.6s;
+}
 .navbar-logo {
   text-decoration: none;
   color: #fff;
   cursor: default;
+  font-family: cursive;
 }
 
 .navbar-links {
@@ -123,12 +138,14 @@ header {
   color: #ddd;
   padding: 10px 20px;
   border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav-link:hover {
-  background-color: #243b55;
+  background-image: linear-gradient(to right ,royalblue, #4B006E);
+  transition: 1.5s;
+  box-shadow: 1rem 1rem 1rem black;
   color: #fff;
+  border-radius: 0.5rem;
 }
 
 .active-link {
