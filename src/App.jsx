@@ -8,8 +8,8 @@ import Theatre from './pages/Theatre'
 import ShowTime from './pages/ShowTime'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
-import ReviewForm from '../components/ReviewForm'
-import ReviewList from '../components/ReviewList'
+import ReviewForm from './components/ReviewForm'
+import ReviewList from './components/ReviewList'
 const App = () => {
   return (
     <div className="App">
