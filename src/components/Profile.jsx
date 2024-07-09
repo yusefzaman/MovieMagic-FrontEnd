@@ -38,18 +38,18 @@ const Profile = () => {
   }, [])
 
   return (
-    <div>
+    <div className="profile-container">
       {user ? (
-        <>
-          <h1>Welcome {user.name}</h1>
-          <h2>Name: {user.name}</h2>
-          <h2>Email: {user.email}</h2>
-        </>
+        <div className="profile-card">
+          <h1 className="profile-welcome">Welcome {user.name}</h1>
+          <h2 className="profile-info">Name: {user.name}</h2>
+          <h2 className="profile-info">Email: {user.email}</h2>
+        </div>
       ) : (
-        <p>User Not Logged In</p>
+        <p className="profile-message">User Not Logged In</p>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default Profile
