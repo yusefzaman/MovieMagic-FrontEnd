@@ -4,6 +4,9 @@ import Profile from '../components/Profile';
 const Home = () => {
   return (
     <div className="home-container">
+      <section className="user-details card">
+        <Profile />
+      </section>
       <div className="content-container card">
         <section className="welcome-signin">
           <iframe
@@ -18,9 +21,6 @@ const Home = () => {
           </Link>
         </section>
       </div>
-      <section className="user-details card">
-        <Profile />
-      </section>
     </div>
   );
 };
