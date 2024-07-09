@@ -6,16 +6,6 @@ import About from './pages/About'
 import Movie from './pages/Movie'
 import Theatre from './pages/Theatre'
 import ShowTime from './pages/ShowTime'
-import Register from './pages/Register'
-import Login from './pages/Login'
-import './App.css'
-import { Route, Routes } from 'react-router-dom'
-import Nav from './components/Nav'
-import Home from './pages/Home'
-import About from './pages/About'
-import Movie from './pages/Movie'
-import Theatre from './pages/Theatre'
-import ShowTime from './pages/ShowTime'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import ReviewForm from './components/ReviewForm'
@@ -45,9 +35,7 @@ const App = () => {
         </Routes>
       </main>
     </div>
-    </div>
   )
 }
 
 export default App
-
