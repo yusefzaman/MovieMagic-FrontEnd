@@ -127,8 +127,12 @@ header {
 }
 
 .nav-link:hover {
-  background-color: #243b55;
+  /* background-color: darkblue; */
+  background-image: linear-gradient(to right ,royalblue, #4B006E);
+  transition: 1.5s;
+  box-shadow: 1rem 1rem 1rem black;
   color: #fff;
+  border-radius: 0.5rem;
 }
 
 .active-link {
