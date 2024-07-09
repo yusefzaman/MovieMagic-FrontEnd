@@ -1,7 +1,7 @@
 body {
   background: linear-gradient(to right, #141e30, #243b55);
   color: #fff;
-  font-family: Arial, sans-serif;
+  font-family: monospace, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -72,6 +72,7 @@ body {
 
 .button:hover {
   background-color: darkblue;
+  transition: 1.5s;
 }
 
 #root {
@@ -248,7 +249,7 @@ h2 {
 
 .container-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -265,10 +266,19 @@ h2 {
   align-items: center;
 }
 
-.movie-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+li {
+  border: #141e30 3px solid;
+  list-style-type: none;
+  padding: 0.25rem;
 }
+
+.movie-card:hover,li:hover {
+  transform: translateY(-5px);
+  transition: 1.5s;
+  box-shadow: 1rem 1rem 1rem black;
+  border-radius: 2rem;
+}
+
 
 .movie-image {
   width: 90%;
@@ -304,12 +314,4 @@ ul {
   gap: 1.5rem;
 }
 
-li {
-  border: #141e30 3px solid;
-  list-style-type: none;
-  padding: 0.25rem;
-}
-li:hover {
-  transition: 1.5s;
-  background-color: darkblue;
-}
+
