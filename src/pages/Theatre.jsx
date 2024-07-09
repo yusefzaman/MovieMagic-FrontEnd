@@ -29,14 +29,16 @@ const Theatre = () => {
   }
 
   return (
-    <div className="theatre">
-      <h2>theatre List</h2>
-      <section className="container-grid">
-        {theatre.map((movie) => (
-          <div key={movie._id} className="movie-card">
-            <img src={movie.img} alt={movie.name} />
-            <h3>Name: {movie.name}</h3>
-            <p>Location: {movie.location}</p>
+    <div className="Theatres">
+      <h2>Movies Details</h2>
+
+      <section className="showTime-grid">
+        {theatres.map((theatre) => (
+          <div key={theatre.id} className="theatre-card">
+            <h3>Theatre Name: {theatre.name}</h3>
+            <p>Location: {theatre.location}</p>
+            <p>Showing Time: {theatre.time}</p>
+
           </div>
         ))}
       </section>
