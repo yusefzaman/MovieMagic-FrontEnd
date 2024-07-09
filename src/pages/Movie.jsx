@@ -36,8 +36,8 @@ const Movie = () => {
             <Link to={`${encodeURIComponent(movie.name)}/theatres`}>
               <img src={movie.img} alt={movie.name} />
             </Link>
-            <h3>Name: {movie.name}</h3>
-            <p>genre: {movie.genre}</p>
+            <h3> {movie.name}</h3>
+            <p> {movie.genre}</p>
           </div>
         ))}
       </section>
