@@ -20,6 +20,8 @@
 
 ##### [GitHub](https://github.com/MohdHusain2000) | [LinkedIn](https://www.linkedin.com/in/mohamed-husain-677384305/)
 
+
+
 ---
 
 ### **_Description_**
@@ -74,6 +76,10 @@
 ---
 
 ### **_Credits_**
+
+#### Avan Sarder
+
+##### [GitHub](https://github.com/avansardar) | [LinkedIn](https://www.linkedin.com/in/avansardar/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 
 ##### This project wouldn't be possible without the incredible educators who poured their heart and soul into the SEI-9 class. Their dedication transformed these students from their initial foundation to becoming capable software engineers. It's a true testament to the power of passionate educators and the impact they can have on their students' lives.
 
