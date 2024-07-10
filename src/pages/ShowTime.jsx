@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const ShowTime = () => {
+  const { movieName, id } = useParams()
+  const navigate = useNavigate() // Initialize the navigate function
+
   const [selected, setSelected] = useState([])
   const [numSeats, setNumSeats] = useState(0)
   const [name, setName] = useState('')
@@ -32,6 +36,9 @@ const ShowTime = () => {
       return
     }
     alert(`Seats reserved successfully: ${selected.join(', ')}.`)
+
+    // Use navigate to programmatically navigate to review page
+    navigate(`/movies/${movieName}/theatres/${id}/Review`)
 
     setSelected([])
     setNumSeats(0)
