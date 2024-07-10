@@ -14,7 +14,7 @@ import axios from 'axios';
   
     const getAvailableSeats = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/available_seats/${showtimeId}`)
+        const response = await axios.get(`http://127.0.0.1:5000/available_seats/${showtimeId}`)
         setAvailable(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -23,7 +23,7 @@ import axios from 'axios';
   
     const getSelectedSeats = async () => {
       try {
-        const response = await axios.post(`http://localhost:5000/reserve_seats/${showtimeId}`)
+        const response = await axios.post(`http://127.0.0.1:5000/reserve_seats/${showtimeId}`)
         setSelected(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
