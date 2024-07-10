@@ -1,6 +1,13 @@
 import { NavLink } from 'react-router-dom'
+import SearchBar from './SearchBar'
 
-const Nav = () => {
+const Nav = ({
+  searchQuery,
+  handleSearchChange,
+  genres,
+  selectedGenres,
+  handleGenreChange
+}) => {
   return (
     <header>
       <nav className="navbar">
@@ -10,7 +17,12 @@ const Nav = () => {
           </NavLink>
         </div>
         <div className="navbar-links">
-          <NavLink to="/" className="nav-link" activeClassName="active-link">
+          <NavLink
+            exact
+            to="/"
+            className="nav-link"
+            activeClassName="active-link"
+          >
             Home
           </NavLink>
           <NavLink
@@ -45,7 +57,15 @@ const Nav = () => {
           </NavLink>
         </div>
       </nav>
+      <SearchBar
+        searchQuery={searchQuery}
+        handleSearchChange={handleSearchChange}
+        genres={genres}
+        selectedGenres={selectedGenres}
+        handleGenreChange={handleGenreChange}
+      />
     </header>
   )
 }
+
 export default Nav
