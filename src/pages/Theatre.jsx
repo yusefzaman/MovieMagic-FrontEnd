@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 const Theatre = () => {
-  const [ theatres, setTheatres] = useState([])
-  const { movieName } = useParams();
+  const [theatres, setTheatres] = useState([])
+  const { movieName } = useParams()
 
   useEffect(() => {
     getTheatres()
@@ -13,7 +13,10 @@ const Theatre = () => {
 
   const getTheatres = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/fetch_theatres`,{movieName: movieName})
+      const response = await axios.post(
+        `http://localhost:5000/fetch_theatres`,
+        { movieName: movieName }
+      )
       setTheatres(response.data.data)
     } catch (error) {
       console.error('Error fetching data:', error)
@@ -39,7 +42,9 @@ const Theatre = () => {
             <p>Location: {theatre.location}</p>
             <ul>
               {theatre.time.map((time, index) => (
-                <Link to ={`${theatre.id}/Seats`}><li key={index}>{time}</li></Link>
+                <Link to={`${theatre.id}/Seats`}>
+                  <li key={index}>{time}</li>
+                </Link>
               ))}
             </ul>
           </div>

@@ -1,9 +1,13 @@
 import axios from 'axios'
 import { useState } from 'react'
-const Login = () => {
+import { useNavigate } from 'react-router-dom'
+
+const Login = ({ setIsLoggedIn, setUser }) => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     const url = 'http://127.0.0.1:5000/signin'
@@ -11,12 +15,18 @@ const Login = () => {
     try {
       const response = await axios.post(url, { email, password })
       localStorage.setItem('token', response.data.access_token)
-      console.log('Login succesful👌')
-      navigate('/profile')
+      setIsLoggedIn(true)
+      // Fetch user details
+      const userResponse = await axios.get('http://127.0.0.1:5000/user', {
+        headers: { Authorization: `Bearer ${response.data.access_token}` }
+      })
+      setUser(userResponse.data)
+      navigate('/')
     } catch (error) {
       setError('Inaccurate Email or password😒(try again)')
     }
   }
+
   return (
     <div className="login-container">
       <div className="login-box">
@@ -43,4 +53,5 @@ const Login = () => {
     </div>
   )
 }
+
 export default Login
