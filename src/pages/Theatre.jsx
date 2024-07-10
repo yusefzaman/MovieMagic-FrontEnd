@@ -32,7 +32,7 @@ const Theatre = () => {
             <p>Location: {theatre.location}</p>
             <ul>
               {theatre.time.map((time, index) => (
-                <Link to ={"Seats"}><li key={index}>{time}</li></Link>
+                <Link to ={`${theatre._id}/Seats`}><li key={index}>{time}</li></Link>
               ))}
             </ul>
           </div>

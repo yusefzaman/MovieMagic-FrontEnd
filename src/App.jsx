@@ -53,7 +53,7 @@ const App = () => {
             }
           />
           <Route path="movies/:movieName/theatres" element={<Theatre />} />
-          <Route path="movies/:movieName/theatres/Seats" element={<ShowTime />} />          
+          <Route path="movies/:movieName/theatres/:id/Seats" element={<ShowTime />} />          
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<Login />} />
         </Routes>
