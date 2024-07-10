@@ -7,16 +7,18 @@ import About from './pages/About'
 import Movie from './pages/Movie'
 import Theatre from './pages/Theatre'
 import ShowTime from './pages/ShowTime'
-import SignIn from './pages/Login'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import ReviewForm from './components/ReviewForm'
 import ReviewList from './components/ReviewList'
+import SignOut from './components/SignOut'
+
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedGenres, setSelectedGenres] = useState([])
   const [genres, setGenres] = useState([])
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [user, setUser] = useState(null)
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value)
   }
@@ -34,11 +36,14 @@ const App = () => {
     <div className="App">
       <div className="space"></div>
       <Nav
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
         searchQuery={searchQuery}
         handleSearchChange={handleSearchChange}
         genres={genres}
         selectedGenres={selectedGenres}
         handleGenreChange={handleGenreChange}
+        user={user}
       />
       <main>
         <Routes>
@@ -51,6 +56,7 @@ const App = () => {
                 searchQuery={searchQuery}
                 selectedGenres={selectedGenres}
                 setGenres={setGenres}
+                user={user}
               />
             }
           />
@@ -61,22 +67,12 @@ const App = () => {
           />
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<Login />} />
-          <Route path="/signin" element={SignIn} />
-          <Route path="/register" element={Register} />
 
-          {/* <ReviewForm
-            // movieId={movieId}
-            // userId={userId}
-            // onReviewSubmitted={handleReviewSubmitted}
+          <Route
+            path="/signout"
+            element={<SignOut setIsLoggedIn={setIsLoggedIn} />}
           />
-          <ReviewList movieId={movieId} /> */}
-
-
-          <Route path="/movies/:movieId" component={MoviePage} />
-          <Route path="/movies" component={MovieList} />
-
-           </Routes>
-
+        </Routes>
       </main>
     </div>
   )

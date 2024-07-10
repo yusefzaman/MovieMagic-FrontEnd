@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
+const Movie = ({ searchQuery, selectedGenres, setGenres, user }) => {
   const [editMode, setEditMode] = useState(false)
-  const [formButtonText, setFormButtonText] = useState("Add New Movie")
+  const [formButtonText, setFormButtonText] = useState('Add New Movie')
   const [editMovieId, setEditMovieId] = useState(null)
 
   const [movies, setMovies] = useState([])
@@ -52,92 +52,95 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
     return filteredMovies
   }
 
-  const initialState = { 
-    name: "", 
-    genre: "",  
-    img: "",
+  const initialState = {
+    name: '',
+    genre: '',
+    img: ''
   }
 
   const [form, setForm] = useState(initialState)
 
   const handleChange = (event) => {
-    setForm({ ...form, [event.target.id]: event.target.value });
+    setForm({ ...form, [event.target.id]: event.target.value })
   }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-    if(editMode){
-      await axios.put(`http://localhost:5000/edit_movie/${id}`, form); }
-    else {
-      await axios.post('http://localhost:5000/add_movie', form);
-    }
-    setForm(initialState);
-    setEditMode(false)
-    setFormButtonText("Add Movie")
-    setEditMovieId(null)
-    getMovies()
+      if (editMode) {
+        await axios.put(`http://localhost:5000/edit_movie/${editMovieId}`, form)
+      } else {
+        await axios.post('http://localhost:5000/add_movie', form)
+      }
+      setForm(initialState)
+      setEditMode(false)
+      setFormButtonText('Add Movie')
+      setEditMovieId(null)
+      getMovies()
     } catch (error) {
-    console.error('Error creating movie:', error);
+      console.error('Error creating movie:', error)
     }
-  };
+  }
 
   const handleEdit = (movieId) => {
-    const Edit = movies.find(movie => movie._id == movieId);
+    const Edit = movies.find((movie) => movie._id === movieId)
     setForm({
       name: Edit.name,
       genre: Edit.genre,
       img: Edit.img,
-      business: Edit.business,
-    });
+      business: Edit.business
+    })
     setEditMode(true)
-    setFormButtonText("Edit Movie")
+    setFormButtonText('Edit Movie')
     setEditMovieId(movieId)
-  };
+  }
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/remove_movie/${id}`);
-      getMovies(); 
+      await axios.delete(`http://localhost:5000/remove_movie/${id}`)
+      getMovies()
     } catch (error) {
-      console.error('Error deleting movie:', error);
+      console.error('Error deleting movie:', error)
     }
-  };
+  }
 
   return (
-    <div className='movies'>
+    <div className="movies">
       <h2>Movies List</h2>
-        <form className='MovieForm' onSubmit={handleSubmit}>
-      <label htmlFor="name">Movie Name:</label>
-      <input
-        id="name"
-        type="text"
-        onChange={handleChange}
-        value={form.name}
-      />
-      <label htmlFor="genre">genre:</label>
-      <input
-        id="genre"
-        type="text"
-        onChange={handleChange}
-        value={form.genre}
-      />
-       <label htmlFor="img">Image URL:</label>
-      <input
-        id="img"
-        type="text"
-        onChange={handleChange}
-        value={form.img}
-      />
-       <label htmlFor="business"></label>
-       <input id="business" 
-       name="business" 
-       type="hidden"
-       onChange={handleChange}
-       value={form.business} />
-
-      <button type="submit">{formButtonText}</button>
-    </form>
+      {user && user.admin && (
+        <form className="MovieForm" onSubmit={handleSubmit}>
+          <label htmlFor="name">Movie Name:</label>
+          <input
+            id="name"
+            type="text"
+            onChange={handleChange}
+            value={form.name}
+          />
+          <label htmlFor="genre">Genre:</label>
+          <input
+            id="genre"
+            type="text"
+            onChange={handleChange}
+            value={form.genre}
+          />
+          <label htmlFor="img">Image URL:</label>
+          <input
+            id="img"
+            type="text"
+            onChange={handleChange}
+            value={form.img}
+          />
+          <label htmlFor="business"></label>
+          <input
+            id="business"
+            name="business"
+            type="hidden"
+            onChange={handleChange}
+            value={form.business}
+          />
+          <button type="submit">{formButtonText}</button>
+        </form>
+      )}
 
       <section className="container-grid">
         {filterMovies().map((movie) => (
@@ -151,10 +154,15 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
                 <li key={genre} className={genre.toLowerCase()}>
                   {genre}
                 </li>
-                
               ))}
-              <button onClick={() => handleEdit(movie._id)}>Edit</button>
-              <button onClick={() => handleDelete(movie._id)}>Delete</button>
+              {user && user.admin && (
+                <>
+                  <button onClick={() => handleEdit(movie._id)}>Edit</button>
+                  <button onClick={() => handleDelete(movie._id)}>
+                    Delete
+                  </button>
+                </>
+              )}
             </ul>
           </div>
         ))}

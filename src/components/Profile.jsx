@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const Profile = () => {
@@ -37,6 +36,7 @@ const Profile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
+    console.log('token:', token)
     if (token) {
       checkToken()
     }
@@ -49,6 +49,9 @@ const Profile = () => {
           <h1 className="profile-welcome">Welcome {user.name}</h1>
           <h2 className="profile-info">Name: {user.name}</h2>
           <h2 className="profile-info">Email: {user.email}</h2>
+          <h2 className="profile-info">
+            staute:{user.admin ? 'admin' : 'user'}
+          </h2>
         </div>
       ) : (
         <p className="profile-message">User Not Logged In</p>

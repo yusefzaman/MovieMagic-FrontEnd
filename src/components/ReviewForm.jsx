@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const ReviewForm = ({ movieId, userId, onReviewSubmitted }) => {
   const [content, setContent] = useState('')
