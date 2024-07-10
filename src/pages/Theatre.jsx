@@ -8,38 +8,17 @@ const Theatre = () => {
   const { movieName } = useParams();
 
   useEffect(() => {
-    console.log("response");
-
     getTheatres()
-    // Theatres()
   }, [movieName])
 
-
-  const gettheatre = async () => {
+  const getTheatres = async () => {
     try {
       const response = await axios.post(`http://localhost:5000/fetch_theatres`,{movieName: movieName})
-      // console.log("response",response.data);
-      // const data= response.data.map(theatre=>{
-      //   theatre.time=theatre.time.slice(1,theatre.time.length-1).split(",")
-      //   return theatre
-      // })
-
       setTheatres(response.data.data)
     } catch (error) {
       console.error('Error fetching data:', error)
     }
   }
-
-
-  // const Theatres = async () => {
-  //   try {
-  //     const response = await axios.post(`http://localhost:5000/theatres`,{movieName: movieName})
-  //     console.log("response",response.data);
-  //     setTheatres(response.data)
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error)
-  //   }
-  // }
 
   const handleChange = (event) => {
     setForm({ ...form, [event.target.id]: event.target.value })

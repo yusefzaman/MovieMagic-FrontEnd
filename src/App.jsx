@@ -59,12 +59,12 @@ const App = () => {
           <Route path="/signin" element={<Login />} />
           <Route path="/signin" element={SignIn} />
           <Route path="/register" element={Register} />
-          <ReviewForm
-            movieId={movieId}
-            userId={userId}
-            onReviewSubmitted={handleReviewSubmitted}
+          {/* <ReviewForm
+            // movieId={movieId}
+            // userId={userId}
+            // onReviewSubmitted={handleReviewSubmitted}
           />
-          <ReviewList movieId={movieId} />
+          <ReviewList movieId={movieId} /> */}
         </Routes>
       </main>
     </div>
