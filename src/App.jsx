@@ -7,6 +7,7 @@ import About from './pages/About'
 import Movie from './pages/Movie'
 import Theatre from './pages/Theatre'
 import ShowTime from './pages/ShowTime'
+import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Login from './pages/Login'
 
@@ -56,6 +57,14 @@ const App = () => {
           <Route path="movies/:movieName/theatres/:id/Seats" element={<ShowTime />} />          
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<Login />} />
+          <Route path="/signin" element={SignIn} />
+          <Route path="/register" element={Register} />
+          <ReviewForm
+            movieId={movieId}
+            userId={userId}
+            onReviewSubmitted={handleReviewSubmitted}
+          />
+          <ReviewList movieId={movieId} />
         </Routes>
       </main>
     </div>

@@ -12,13 +12,21 @@ const Theatre = () => {
   }, [movieName])
 
 
-  const getTheatres = async () => {
+  const gettheatre = async () => {
     try {
       const response = await axios.post(`http://localhost:5000/fetch_theatres`,{movieName: movieName})
       setTheatres(response.data.data)
     } catch (error) {
       console.error('Error fetching data:', error)
     }
+  }
+
+  const handleChange = (event) => {
+    setForm({ ...form, [event.target.id]: event.target.value })
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
   }
 
   return (
