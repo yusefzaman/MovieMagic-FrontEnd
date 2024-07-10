@@ -57,7 +57,7 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
             <Link to={`${encodeURIComponent(movie.name)}/theatres`}>
               <img src={movie.img} alt={movie.name} />
             </Link>
-            <h3>{movie.name}</h3>
+            <h3 className="movieName">{movie.name}</h3>
             <ul className="genres">
               {movie.genre.split(', ').map((genre) => (
                 <li key={genre} className={genre.toLowerCase()}>

@@ -111,14 +111,13 @@ header {
   font-weight: bold;
   color: #fff;
 }
-.genre{
-  background-color: black;
+.genres{
   padding: 1rem;
   
 }
-.genre:hover{
+.genres:hover{
   border-radius: 2rem;
-  box-shadow: 1rem 1rem 1rem black;
+  box-shadow: 1rem 1rem 1rem darkblue;
   transition: 1.6s;
   color: green;
 }
