@@ -1,17 +1,25 @@
 import axios from 'axios'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 const Register = () => {
+  const navigate = useNavigate()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
+  const [registrationMessage, setRegistrationMessage] = useState('')
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
     if (password !== confirmPassword) {
-      setError('Invalid Password')
+      setError('Passwords do not match')
+      setRegistrationMessage('')
+      return
     }
+
     const url = 'http://127.0.0.1:5000/register'
     try {
       const response = await axios.post(url, {
@@ -19,12 +27,25 @@ const Register = () => {
         email,
         password
       })
-      console.log(response.data)
+
+      // Handle success
+      const { data } = response
+      setRegistrationMessage(
+        `Nice work ${name}! You're registered successfully.`
+      )
+      setError('')
+
+      // Redirect after successful registration
+      setTimeout(() => {
+        navigate('/signin') // Navigate to the signin page after successful registration
+      }, 2000) // Redirect after 2 seconds
     } catch (error) {
       console.error(error)
       setError('Registration failed')
+      setRegistrationMessage('')
     }
   }
+
   return (
     <div className="register">
       <div className="registerCard">
@@ -73,6 +94,9 @@ const Register = () => {
             />
           </div>
           {error && <p className="error">{error}</p>}
+          {registrationMessage && (
+            <p className="success">{registrationMessage}</p>
+          )}
           <button
             type="submit"
             disabled={

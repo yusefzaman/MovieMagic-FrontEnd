@@ -6,7 +6,7 @@ const Login = () => {
   const [error, setError] = useState('')
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const url = 'http://127.0.0.1:5000/login'
+    const url = 'http://127.0.0.1:5000/signin'
 
     try {
       const response = await axios.post(url, { email, password })
@@ -40,6 +40,6 @@ const Login = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 export default Login
