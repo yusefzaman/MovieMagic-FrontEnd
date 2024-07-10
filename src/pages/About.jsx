@@ -1,4 +1,3 @@
-
 const About = () => {
   return (
     <div className="about-container">
@@ -11,12 +10,11 @@ const About = () => {
         </h4>
         <h5 className="about-description">
           The user can use the signup page to create a login, and then navigate
-          through the app to view movies, theatres, showtimes, and book
-          tickets.
+          through the app to view movies, theatres, showtimes, and book tickets.
         </h5>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default About;
+export default About

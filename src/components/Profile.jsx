@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const Profile = () => {
   const [user, setUser] = useState(null)
@@ -7,14 +8,18 @@ const Profile = () => {
   const CheckSession = async () => {
     const token = localStorage.getItem('token')
     try {
-      const response = await fetch('http://127.0.0.1:5000/users/:uuid', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`
+      const response = await axios.get(
+        'http://127.0.0.1:5000/users/getDetails',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
-      })
-      if (!response.ok) throw new Error('Network response was not ok')
-      const userData = await response.json()
+      )
+      console.log(`response ${JSON.stringify(response)}`)
+      // if (!response.ok) throw new Error('Network response was not ok')
+      const userData = await response.data
+      console.log(`userData ${userData}`)
       return userData
     } catch (error) {
       console.error(
@@ -49,7 +54,7 @@ const Profile = () => {
         <p className="profile-message">User Not Logged In</p>
       )}
     </div>
-  );
-};
+  )
+}
 
 export default Profile
