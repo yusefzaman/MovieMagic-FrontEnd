@@ -20,6 +20,10 @@
 
 ##### [GitHub](https://github.com/MohdHusain2000) | [LinkedIn](https://www.linkedin.com/in/mohamed-husain-677384305/)
 
+#### Avan Sarder
+
+##### [GitHub](https://github.com/avansardar) | [LinkedIn](https://www.linkedin.com/in/avansardar/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+
 ---
 
 ### **_Description_**
