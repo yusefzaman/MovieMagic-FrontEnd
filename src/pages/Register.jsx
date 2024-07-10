@@ -28,17 +28,16 @@ const Register = () => {
         password
       })
 
-      // Handle success
+      
       const { data } = response
       setRegistrationMessage(
         `Nice work ${name}! You're registered successfully.`
       )
       setError('')
 
-      // Redirect after successful registration
       setTimeout(() => {
-        navigate('/signin') // Navigate to the signin page after successful registration
-      }, 2000) // Redirect after 2 seconds
+        navigate('/signin') 
+      }, 2000)
     } catch (error) {
       console.error(error)
       setError('Registration failed')
@@ -47,8 +46,9 @@ const Register = () => {
   }
 
   return (
-    <div className="register">
-      <div className="registerCard">
+    <div className="register-container">
+      <div className="register-box">
+        <h2>Register</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
             <label htmlFor="name">Name</label>
@@ -72,7 +72,6 @@ const Register = () => {
               required
             />
           </div>
-
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
             <input
@@ -93,9 +92,9 @@ const Register = () => {
               required
             />
           </div>
-          {error && <p className="error">{error}</p>}
+          {error && <p className="error-message">{error}</p>}
           {registrationMessage && (
-            <p className="success">{registrationMessage}</p>
+            <p className="success-message">{registrationMessage}</p>
           )}
           <button
             type="submit"
