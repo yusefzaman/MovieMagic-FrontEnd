@@ -4,7 +4,8 @@ import axios from 'axios'
 const Profile = () => {
   const [user, setUser] = useState(null)
 
-  const CheckSession = async () => {
+  // Function to fetch user details from the backend
+  const fetchUserDetails = async () => {
     const token = localStorage.getItem('token')
     try {
       const response = await axios.get(
@@ -15,30 +16,39 @@ const Profile = () => {
           }
         }
       )
-      console.log(`response ${JSON.stringify(response)}`)
-      // if (!response.ok) throw new Error('Network response was not ok')
-      const userData = await response.data
-      console.log(`userData ${userData}`)
-      return userData
+      return response.data // Return user data from the response
     } catch (error) {
-      console.error(
-        'There has been a problem with your fetch operation:',
-        error
-      )
+      console.error('Error fetching user details:', error)
       return null
     }
   }
 
-  const checkToken = async () => {
-    const user = await CheckSession()
-    setUser(user)
+  // Function to update user admin status
+  const makeAdmin = async () => {
+    const token = localStorage.getItem('token')
+    try {
+      const response = await axios.put(
+        `http://127.0.0.1:5000/users/${user.id}`,
+        { admin: true },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      setUser(response.data) // Update user data after admin status update
+    } catch (error) {
+      console.error('Error updating admin status:', error)
+    }
   }
 
+  // Fetch user details and set state on component mount
   useEffect(() => {
     const token = localStorage.getItem('token')
-    console.log('token:', token)
     if (token) {
-      checkToken()
+      fetchUserDetails().then((userData) => {
+        setUser(userData)
+      })
     }
   }, [])
 
@@ -50,8 +60,9 @@ const Profile = () => {
           <h2 className="profile-info">Name: {user.name}</h2>
           <h2 className="profile-info">Email: {user.email}</h2>
           <h2 className="profile-info">
-            staute:{user.admin ? 'admin' : 'user'}
+            Status: {user.admin ? 'Admin' : 'User'}
           </h2>
+          {!user.admin && <button onClick={makeAdmin}>Make Admin</button>}
         </div>
       ) : (
         <p className="profile-message">User Not Logged In</p>
