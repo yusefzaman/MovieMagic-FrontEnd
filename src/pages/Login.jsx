@@ -13,7 +13,7 @@ const Login = () => {
       localStorage.setItem('token', response.data.access_token)
       console.log('Login succesful👌')
     } catch (error) {
-      setError('Inaccurate Email or password')
+      setError('Inaccurate Email or password😒(try again)')
     }
   }
   return (
