@@ -18,24 +18,26 @@ const Nav = ({
         </div>
         <div className="navbar-links">
           <NavLink
-            exact
             to="/"
             className="nav-link"
-            activeClassName="active-link"
+            /*             activeClassName="active-link"
+             */
           >
             Home
           </NavLink>
           <NavLink
             to="/about"
             className="nav-link"
-            activeClassName="active-link"
+            /*             activeClassName="active-link"
+             */
           >
             About
           </NavLink>
           <NavLink
             to="/movies"
             className="nav-link"
-            activeClassName="active-link"
+            /*             activeClassName="active-link"
+             */
           >
             Movies
           </NavLink>
@@ -44,14 +46,16 @@ const Nav = ({
           <NavLink
             to="/register"
             className="nav-link"
-            activeClassName="active-link"
+            /*             activeClassName="active-link"
+             */
           >
             Register
           </NavLink>
           <NavLink
             to="/signin"
             className="nav-link"
-            activeClassName="active-link"
+            /*             activeClassName="active-link"
+             */
           >
             Sign In
           </NavLink>
