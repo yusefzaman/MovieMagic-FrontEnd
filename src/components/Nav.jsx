@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import SearchBar from './SearchBar'
 
 const Nav = ({
@@ -6,8 +7,23 @@ const Nav = ({
   handleSearchChange,
   genres,
   selectedGenres,
-  handleGenreChange
+  handleGenreChange,
+  isLoggedIn,
+  setIsLoggedIn
 }) => {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    setIsLoggedIn(!!token)
+  }, [setIsLoggedIn])
+
+  const handleSignOut = () => {
+    localStorage.removeItem('token')
+    setIsLoggedIn(false)
+    navigate('/')
+  }
+
   return (
     <header>
       <nav className="navbar">
@@ -17,48 +33,31 @@ const Nav = ({
           </NavLink>
         </div>
         <div className="navbar-links">
-          <NavLink
-            to="/"
-            className="nav-link"
-            /*             activeClassName="active-link"
-             */
-          >
+          <NavLink to="/" className="nav-link">
             Home
           </NavLink>
-          <NavLink
-            to="/about"
-            className="nav-link"
-            /*             activeClassName="active-link"
-             */
-          >
+          <NavLink to="/about" className="nav-link">
             About
           </NavLink>
-          <NavLink
-            to="/movies"
-            className="nav-link"
-            /*             activeClassName="active-link"
-             */
-          >
+          <NavLink to="/movies" className="nav-link">
             Movies
           </NavLink>
         </div>
         <div className="navbar-auth">
-          <NavLink
-            to="/register"
-            className="nav-link"
-            /*             activeClassName="active-link"
-             */
-          >
-            Register
-          </NavLink>
-          <NavLink
-            to="/signin"
-            className="nav-link"
-            /*             activeClassName="active-link"
-             */
-          >
-            Sign In
-          </NavLink>
+          {isLoggedIn ? (
+            <button onClick={handleSignOut} className="nav-link">
+              Sign Out
+            </button>
+          ) : (
+            <>
+              <NavLink to="/register" className="nav-link">
+                Register
+              </NavLink>
+              <NavLink to="/signin" className="nav-link">
+                Sign In
+              </NavLink>
+            </>
+          )}
         </div>
       </nav>
       <SearchBar

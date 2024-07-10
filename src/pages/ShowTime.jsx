@@ -1,100 +1,122 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 
-const ShowTime = ({ showtimeId }) => { 
-    const [selected, setSelected] = useState([]);
-    const [available, setAvailable] = useState([]);
-    const [numSeats, setNumSeats] = useState(0);
-    const [name, setName] = useState('');
+const ShowTime = () => {
+  const { movieName, id } = useParams()
+  const navigate = useNavigate() // Initialize the navigate function
 
-    useEffect(() => {
-        if (showtimeId) {
-            getAvailableSeats();
-        }
-    }, [showtimeId]);  
+  const [selected, setSelected] = useState([])
+  const [numSeats, setNumSeats] = useState(0)
+  const [name, setName] = useState('')
 
-    const getAvailableSeats = async () => {
-        try {
-            const response = await axios.get(`http://127.0.0.1:5000/available_seats/${showtimeId}`);
-            setAvailable(response.data);
-        } catch (error) {
-            console.error('Error fetching available seats:', error);
-        }
-    };
+  const Rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+  const Columns = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+  ]
 
-    const reserveSeats = async () => {
-        try {
-            const response = await axios.post(`http://127.0.0.1:5000/reserve_seats/${showtimeId}`, {
-                seats: selected
-            });
-            if (response.data.success) {
-                setSelected([]);  // Clear selected seats after reservation
-                getAvailableSeats();  // Refresh available seats after reservation
-            }
-        } catch (error) {
-            console.error('Error reserving seats:', error);
-        }
-    };
+  const handleSelection = (seat) => {
+    if (selected.includes(seat)) {
+      setSelected(selected.filter((selectedSeat) => selectedSeat !== seat))
+    } else {
+      setSelected([...selected, seat])
+    }
+  }
 
-    const handleSeatSelection = (seat) => {
-        const updatedSeats = selected.includes(seat)
-            ? selected.filter(selectedSeat => selectedSeat !== seat)
-            : [...selected, seat];
-        setSelected(updatedSeats);
-    };
+  const reserveSeats = () => {
+    if (name.trim() === '') {
+      alert('Please enter your name.')
+      return
+    }
+    if (numSeats <= 0) {
+      alert('Please enter a valid number of seats.')
+      return
+    }
+    if (selected.length !== numSeats) {
+      alert(`Please select exactly ${numSeats} seats.`)
+      return
+    }
+    alert(`Seats reserved successfully: ${selected.join(', ')}.`)
 
-    // Render seat layout function
-    const seatLayout = () => {
-        const Rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-        const Columns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    // Use navigate to programmatically navigate to review page
+    navigate(`/movies/${movieName}/theatres/${id}/Review`)
 
-        return (
-            <div className="Grid">
-                {Rows.map((row, rowIndex) => (
-                    <div key={row} className={`row ${rowIndex >= 7 ? 'VIProw' : ''}`}>
-                        {Columns.map((column, colIndex) => {
-                            const seatNumber = `${row}${column}`;
-                            const isAvailable = available.includes(seatNumber);
-                            const isSelected = selected.includes(seatNumber);
-                            const seatClass = isSelected ? 'selected' : (isAvailable ? 'available' : 'unavailable');
+    setSelected([])
+    setNumSeats(0)
+    setName('')
+  }
 
-                            return (
-                                <button
-                                    key={seatNumber}
-                                    className={`seat ${colIndex < 4 ? 'edge-left' : ''} ${colIndex > 15 ? 'edge-right' : ''} ${seatClass}`}
-                                    onClick={() => handleSeatSelection(seatNumber)}
-                                    disabled={!isAvailable}
-                                >
-                                    {seatNumber}
-                                </button>
-                            );
-                        })}
-                    </div>
-                ))}
-            </div>
-        );
-    };
-
+  const seatLayout = () => {
     return (
-        <div className="ReserveSeats">
-            <h2>Reserve Seats</h2>
+      <div className="Grid">
+        {Rows.map((row, rowIndex) => (
+          <div key={row} className={`row ${rowIndex >= 7 ? 'VIProw' : ''}`}>
+            {Columns.map((column, colIndex) => {
+              const seatNumber = `${row}${column}`
+              const isSelected = selected.includes(seatNumber)
+              const seatClass = isSelected ? 'selected' : 'available'
 
-            <div className="inputForm">
-                Name: <input type="text" id="Username" value={name} onChange={(e) => setName(e.target.value)} required />
-                Number of Seats:<input type="number" id="Numseats" value={numSeats} onChange={(e) => setNumSeats(e.target.value)} required />
-                <br /><br />
-                {seatLayout()}
-                <br />
-                <button onClick={reserveSeats}>Reserve Seats</button>
-            </div>
-            <div>
-                Selected Seats:
-                {selected.map(seat => (
-                    <span key={seat}>{seat}, </span>
-                ))}
-            </div>
-        </div>
-    );
-};
+              return (
+                <button
+                  key={seatNumber}
+                  className={`seat ${colIndex < 4 ? 'edge-left' : ''} ${
+                    colIndex > 15 ? 'edge-right' : ''
+                  } ${seatClass}`}
+                  onClick={() => handleSelection(seatNumber)}
+                  disabled={isSelected}
+                >
+                  {seatNumber}
+                </button>
+              )
+            })}
+          </div>
+        ))}
+      </div>
+    )
+  }
 
-export default ShowTime;
+  return (
+    <div className="ReserveSeats">
+      <h2>Reserve Seats</h2>
+
+      <div className="inputForm">
+        <label htmlFor="Username">Name:</label>
+        <input
+          type="text"
+          id="Username"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <br />
+        <label htmlFor="Numseats">Number of Seats:</label>
+        <input
+          type="number"
+          id="Numseats"
+          value={numSeats}
+          onChange={(e) => setNumSeats(parseInt(e.target.value))}
+          required
+        />
+        <br />
+        <br />
+        {seatLayout()}
+        <br />
+        <button
+          onClick={reserveSeats}
+          disabled={
+            selected.length !== numSeats || numSeats === 0 || name.trim() === ''
+          }
+        >
+          Reserve Seats
+        </button>
+      </div>
+      <div>
+        Selected Seats:
+        {selected.map((seat) => (
+          <span key={seat}>{seat}, </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default ShowTime

@@ -376,3 +376,153 @@ ul {
   margin-right: -20px;
 } 
 
+.MovieForm{
+  display: grid;
+  grid-template-columns: 1fr ;
+  color: white;
+  padding: 3vh;
+  text-align: left;
+  font-size: bold;
+  margin: 3vh;
+
+}
+
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1c1c1c; 
+  color: #ffffff;
+}
+
+.login-box {
+  background-color: #333333;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #444444;
+  color: #ffffff;
+}
+
+.login-box input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.login-box .error-message {
+  color: #ff6666;
+  margin: 10px 0;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-box button:hover {
+  background-color: #0056b3;
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1c1c1c; 
+  color: #ffffff; 
+}
+
+.register-box {
+  background-color: #333333;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.register-box h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.input-wrapper {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-wrapper label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ffffff; 
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #444444;  
+  color: #ffffff;
+}
+
+.input-wrapper input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.error-message {
+  color: #ff6666;
+  margin: 10px 0;
+}
+
+.success-message {
+  color: #66ff66;
+  margin: 10px 0;
+}
+
+.register-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-box button:hover {
+  background-color: #0056b3;
+}

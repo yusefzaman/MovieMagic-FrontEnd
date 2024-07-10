@@ -1,45 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 const Theatre = () => {
-  const [ theatres, setTheatres] = useState([])
-  const { movieName } = useParams();
+  const [theatres, setTheatres] = useState([])
+  const { movieName } = useParams()
 
   useEffect(() => {
-    console.log("response");
-
     getTheatres()
-    // Theatres()
   }, [movieName])
 
-
-  const gettheatre = async () => {
+  const getTheatres = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/fetch_theatres`,{movieName: movieName})
-      // console.log("response",response.data);
-      // const data= response.data.map(theatre=>{
-      //   theatre.time=theatre.time.slice(1,theatre.time.length-1).split(",")
-      //   return theatre
-      // })
-
+      const response = await axios.post(
+        `http://localhost:5000/fetch_theatres`,
+        { movieName: movieName }
+      )
       setTheatres(response.data.data)
     } catch (error) {
       console.error('Error fetching data:', error)
     }
   }
-
-
-  // const Theatres = async () => {
-  //   try {
-  //     const response = await axios.post(`http://localhost:5000/theatres`,{movieName: movieName})
-  //     console.log("response",response.data);
-  //     setTheatres(response.data)
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error)
-  //   }
-  // }
 
   const handleChange = (event) => {
     setForm({ ...form, [event.target.id]: event.target.value })
@@ -60,7 +42,9 @@ const Theatre = () => {
             <p>Location: {theatre.location}</p>
             <ul>
               {theatre.time.map((time, index) => (
-                <Link to ={`${theatre.id}/Seats`}><li key={index}>{time}</li></Link>
+                <Link to={`${theatre.id}/Seats`}>
+                  <li key={index}>{time}</li>
+                </Link>
               ))}
             </ul>
           </div>

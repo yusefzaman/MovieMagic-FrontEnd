@@ -1,7 +1,3 @@
-
-
-import React from 'react';
-
 const SearchBar = ({
   searchQuery,
   handleSearchChange,
@@ -35,4 +31,3 @@ const SearchBar = ({
 }
 
 export default SearchBar
-

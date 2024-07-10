@@ -1,31 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-const ReviewForm = ({ movieId, userId, onReviewSubmitted }) => {
-  const [content, setContent] = useState('')
-  const [rating, setRating] = useState('')
+const ReviewForm = ({ movieId, userId }) => {
+  const [content, setContent] = useState('');
+  const [rating, setRating] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const response = await fetch('/reviews', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({
-        content,
-        rating,
-        movie_id: movieId,
-        user_id: userId
-      })
-    })
-    const result = await response.json()
-    if (result.message === 'Review created successfully') {
-      onReviewSubmitted(result)
-      setContent('')
-      setRating('')
+    e.preventDefault();
+    try {
+      const response = await fetch('/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // Add authorization headers if needed
+        },
+        body: JSON.stringify({
+          content,
+          rating,
+          user_id: userId,
+          movie_id: movieId,
+        }),
+      });
+      const result = await response.json();
+      console.log(result); // Handle response as needed
+    } catch (error) {
+      console.error('Error submitting review:', error);
     }
-  }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -47,6 +48,8 @@ const ReviewForm = ({ movieId, userId, onReviewSubmitted }) => {
       </div>
       <button type="submit">Submit Review</button>
     </form>
-  )
-}
-export default ReviewForm
+  );
+};
+
+export default ReviewForm;
+

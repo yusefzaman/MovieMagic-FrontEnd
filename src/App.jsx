@@ -10,7 +10,7 @@ import ShowTime from './pages/ShowTime'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import ReviewForm from './components/ReviewForm'
-
+import ReviewList from './components/ReviewList'
 import SignOut from './components/SignOut'
 
 const App = () => {
