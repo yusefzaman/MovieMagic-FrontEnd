@@ -6,7 +6,7 @@ import About from './pages/About'
 import Movie from './pages/Movie'
 import Theatre from './pages/Theatre'
 import ShowTime from './pages/ShowTime'
-import SignIn from './pages/SignIn'
+import SignIn from './pages/Login'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import { useState } from 'react'
@@ -59,12 +59,12 @@ const App = () => {
           <Route path="/signin" element={<Login />} />
           <Route path="/signin" element={SignIn} />
           <Route path="/register" element={Register} />
-          <ReviewForm
+          {/* <ReviewForm
             movieId={movieId}
             userId={userId}
-            onReviewSubmitted={handleReviewSubmitted}
-          />
-          <ReviewList movieId={movieId} />
+            // onReviewSubmitted={handleReviewSubmitted}
+          /> */}
+          {/* <ReviewList movieId={movieId} /> */}
         </Routes>
       </main>
     </div>
