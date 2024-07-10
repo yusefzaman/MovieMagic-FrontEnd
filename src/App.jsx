@@ -8,16 +8,50 @@ import Theatre from './pages/Theatre'
 import ShowTime from './pages/ShowTime'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import { useState } from 'react'
+
 const App = () => {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedGenres, setSelectedGenres] = useState([])
+  const [genres, setGenres] = useState([])
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value)
+  }
+
+  const handleGenreChange = (event) => {
+    const genre = event.target.value
+    setSelectedGenres((prevGenres) =>
+      prevGenres.includes(genre)
+        ? prevGenres.filter((g) => g !== genre)
+        : [...prevGenres, genre]
+    )
+  }
+
   return (
     <div className="App">
       <div className="space"></div>
-      <Nav></Nav>
+      <Nav
+        searchQuery={searchQuery}
+        handleSearchChange={handleSearchChange}
+        genres={genres}
+        selectedGenres={selectedGenres}
+        handleGenreChange={handleGenreChange}
+      />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/movies" element={<Movie />} />
+          <Route
+            path="/movies"
+            element={
+              <Movie
+                searchQuery={searchQuery}
+                selectedGenres={selectedGenres}
+                setGenres={setGenres}
+              />
+            }
+          />
           <Route path="movies/:movieName/theatres" element={<Theatre />} />
           <Route path="/Seats" element={<ShowTime />} />
           <Route path="/register" element={<Register />} />
