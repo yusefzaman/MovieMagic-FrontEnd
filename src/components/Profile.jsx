@@ -16,9 +16,7 @@ const Profile = () => {
           }
         }
       )
- hussain
       return response.data // Return user data from the response
-
     } catch (error) {
       console.error('Error fetching user details:', error)
       return null

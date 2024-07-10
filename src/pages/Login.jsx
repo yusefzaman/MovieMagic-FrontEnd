@@ -15,9 +15,8 @@ const Login = () => {
     try {
       const response = await axios.post(url, { email, password })
       localStorage.setItem('token', response.data.access_token)
- hussain
-      navigate('/') // Navigate to home page after successful login
 
+      navigate('/') // Navigate to home page after successful login
     } catch (error) {
       setError('Inaccurate Email or password😒(try again)')
     }
