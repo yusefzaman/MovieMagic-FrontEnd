@@ -1,3 +1,7 @@
+
+
+import React from 'react';
+
 const SearchBar = ({
   searchQuery,
   handleSearchChange,
@@ -13,7 +17,7 @@ const SearchBar = ({
         value={searchQuery}
         onChange={handleSearchChange}
       />
-      {/*   <div className="genre-filters">
+      <div className="genre-filters">
         {genres.map((genre) => (
           <label key={genre}>
             <input
@@ -25,9 +29,10 @@ const SearchBar = ({
             {genre}
           </label>
         ))}
-      </div> */}
+      </div>
     </div>
   )
 }
 
 export default SearchBar
+

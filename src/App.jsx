@@ -7,10 +7,11 @@ import About from './pages/About'
 import Movie from './pages/Movie'
 import Theatre from './pages/Theatre'
 import ShowTime from './pages/ShowTime'
-import SignIn from './pages/SignIn'
+import SignIn from './pages/Login'
 import Register from './pages/Register'
 import Login from './pages/Login'
-
+import ReviewForm from './components/ReviewForm'
+import ReviewList from './components/ReviewList'
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedGenres, setSelectedGenres] = useState([])
@@ -54,18 +55,28 @@ const App = () => {
             }
           />
           <Route path="movies/:movieName/theatres" element={<Theatre />} />
-          <Route path="movies/:movieName/theatres/:id/Seats" element={<ShowTime />} />          
+          <Route
+            path="movies/:movieName/theatres/:id/Seats"
+            element={<ShowTime />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/signin" element={SignIn} />
           <Route path="/register" element={Register} />
+
           {/* <ReviewForm
             // movieId={movieId}
             // userId={userId}
             // onReviewSubmitted={handleReviewSubmitted}
           />
           <ReviewList movieId={movieId} /> */}
-        </Routes>
+
+
+          <Route path="/movies/:movieId" component={MoviePage} />
+          <Route path="/movies" component={MovieList} />
+
+           </Routes>
+
       </main>
     </div>
   )
