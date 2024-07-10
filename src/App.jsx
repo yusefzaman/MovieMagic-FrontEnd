@@ -1,5 +1,6 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
+import { useState } from 'react'
 import Nav from './components/Nav'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -8,7 +9,6 @@ import Theatre from './pages/Theatre'
 import ShowTime from './pages/ShowTime'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import { useState } from 'react'
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -53,7 +53,7 @@ const App = () => {
             }
           />
           <Route path="movies/:movieName/theatres" element={<Theatre />} />
-          <Route path="/Seats" element={<ShowTime />} />
+          <Route path="movies/:movieName/theatres/Seats" element={<ShowTime />} />          
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<Login />} />
         </Routes>
