@@ -376,3 +376,14 @@ ul {
   margin-right: -20px;
 } 
 
+.MovieForm{
+  display: grid;
+  grid-template-columns: 1fr ;
+  color: white;
+  padding: 3vh;
+  text-align: left;
+  font-size: bold;
+  margin: 3vh;
+
+}
+

@@ -3,6 +3,10 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
+  const [editMode, setEditMode] = useState(false)
+  const [formButtonText, setFormButtonText] = useState("Add New Movie")
+  const [editMovieId, setEditMovieId] = useState(null)
+
   const [movies, setMovies] = useState([])
 
   useEffect(() => {
@@ -48,9 +52,93 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
     return filteredMovies
   }
 
+  const initialState = { 
+    name: "", 
+    genre: "",  
+    img: "",
+  }
+
+  const [form, setForm] = useState(initialState)
+
+  const handleChange = (event) => {
+    setForm({ ...form, [event.target.id]: event.target.value });
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+    if(editMode){
+      await axios.put(`http://localhost:5000/edit_movie/${id}`, form); }
+    else {
+      await axios.post('http://localhost:5000/add_movie', form);
+    }
+    setForm(initialState);
+    setEditMode(false)
+    setFormButtonText("Add Movie")
+    setEditMovieId(null)
+    getMovies()
+    } catch (error) {
+    console.error('Error creating movie:', error);
+    }
+  };
+
+  const handleEdit = (movieId) => {
+    const Edit = movies.find(movie => movie._id == movieId);
+    setForm({
+      name: Edit.name,
+      genre: Edit.genre,
+      img: Edit.img,
+      business: Edit.business,
+    });
+    setEditMode(true)
+    setFormButtonText("Edit Movie")
+    setEditMovieId(movieId)
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/remove_movie/${id}`);
+      getMovies(); 
+    } catch (error) {
+      console.error('Error deleting movie:', error);
+    }
+  };
+
   return (
-    <div>
+    <div className='movies'>
       <h2>Movies List</h2>
+        <form className='MovieForm' onSubmit={handleSubmit}>
+      <label htmlFor="name">Movie Name:</label>
+      <input
+        id="name"
+        type="text"
+        onChange={handleChange}
+        value={form.name}
+      />
+      <label htmlFor="genre">genre:</label>
+      <input
+        id="genre"
+        type="text"
+        onChange={handleChange}
+        value={form.genre}
+      />
+       <label htmlFor="img">Image URL:</label>
+      <input
+        id="img"
+        type="text"
+        onChange={handleChange}
+        value={form.img}
+      />
+       <label htmlFor="business"></label>
+       <input id="business" 
+       name="business" 
+       type="hidden"
+       onChange={handleChange}
+       value={form.business} />
+
+      <button type="submit">{formButtonText}</button>
+    </form>
+
       <section className="container-grid">
         {filterMovies().map((movie) => (
           <div key={movie.id} className="movie-card">
@@ -63,7 +151,10 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
                 <li key={genre} className={genre.toLowerCase()}>
                   {genre}
                 </li>
+                
               ))}
+              <button onClick={() => handleEdit(movie._id)}>Edit</button>
+              <button onClick={() => handleDelete(movie._id)}>Delete</button>
             </ul>
           </div>
         ))}

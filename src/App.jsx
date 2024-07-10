@@ -71,10 +71,12 @@ const App = () => {
           />
           <ReviewList movieId={movieId} /> */}
 
+
           <Route path="/movies/:movieId" component={MoviePage} />
           <Route path="/movies" component={MovieList} />
 
            </Routes>
+
       </main>
     </div>
   )
