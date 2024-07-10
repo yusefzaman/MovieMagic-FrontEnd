@@ -17,38 +17,18 @@ const Nav = ({
           </NavLink>
         </div>
         <div className="navbar-links">
-          <NavLink
-            to="/"
-            className="nav-link"
-            /*             activeClassName="active-link"
-             */
-          >
+          <NavLink to="/" className="nav-link">
             Home
           </NavLink>
-          <NavLink
-            to="/about"
-            className="nav-link"
-            /*             activeClassName="active-link"
-             */
-          >
+          <NavLink to="/about" className="nav-link">
             About
           </NavLink>
-          <NavLink
-            to="/movies"
-            className="nav-link"
-            /*             activeClassName="active-link"
-             */
-          >
+          <NavLink to="/movies" className="nav-link">
             Movies
           </NavLink>
         </div>
         <div className="navbar-auth">
-          <NavLink
-            to="/register"
-            className="nav-link"
-            /*             activeClassName="active-link"
-             */
-          >
+          <NavLink to="/register" className="nav-link">
             Register
           </NavLink>
           <NavLink
