@@ -33,7 +33,7 @@ const Movie = () => {
       <section className="container-grid">
         {movies.map((movie) => (
           <div key={movie.id} className="movie-card">
-          <Link to = {`/theatres`} ><img src={movie.img} alt={movie.name} /></Link>
+          <Link to = {`${encodeURIComponent(movie.name)}/theatres`} ><img src={movie.img} alt={movie.name} /></Link>
             <h3>Name: {movie.name}</h3>
             <p>genre: {movie.genre}</p>
           </div>
