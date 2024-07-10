@@ -76,10 +76,12 @@ input:focus{
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
+
 button{
   padding: 5px;
   font-size: 1rem;
 }
+
 .button:hover,button:hover {
   background-color: darkblue;
   transition: 1.5s;
@@ -340,4 +342,37 @@ ul {
   gap: 1.5rem;
 }
 
+.seat {
+  background-color: grey;
+  font-size: 8.5px;
+  height: 5.5vh;
+  width: 5.5vh;
+  border: #1c1c1c 2px solid;
+}
+
+.Grid{
+  gap: 3.5px;
+}
+
+.row {
+  display: flex;
+  gap: 6.5px;
+  margin-left: 30vh;
+
+} 
+
+.VIProw {
+  margin-top: 2.5vh;
+  margin-bottom: -2.5vh;
+}
+
+.edge-left {
+  margin-left: -20.5px;
+  margin-right: 20px;
+} 
+
+.edge-right {
+  margin-left: 15.5px;
+  margin-right: -20px;
+} 
 
