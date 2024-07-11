@@ -5,12 +5,26 @@ const ReviewList = ({ movieId }) => {
 
   useEffect(() => {
     const fetchReviews = async () => {
-      const response = await fetch(`/reviews/${movieId}`)
-      const result = await response.json()
-      setReviews(result)
+      try {
+        const response = await fetch(
+          `http://localhost:5000/reviews/${movieId}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          }
+        )
+        const result = await response.json()
+        setReviews(result)
+      } catch (error) {
+        console.error('Error fetching reviews:', error)
+      }
     }
+
     fetchReviews()
   }, [movieId])
+
   return (
     <div>
       <h3>Reviews</h3>
@@ -29,4 +43,5 @@ const ReviewList = ({ movieId }) => {
     </div>
   )
 }
+
 export default ReviewList
