@@ -8,19 +8,25 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
   const [editMovieId, setEditMovieId] = useState(null)
   const [movies, setMovies] = useState([])
   const [isAdmin, setIsAdmin] = useState(false)
+  const [isUser, setIsUser] = useState(false) // Track if the user is logged in
 
   useEffect(() => {
+    checkUserStatus()
     checkAdminStatus()
     getMovies()
   }, [])
 
   useEffect(() => {
     filterMovies()
-  }, [searchQuery, selectedGenres])
+  }, [searchQuery, selectedGenres, movies]) // Include 'movies' in dependency array for filterMovies
+
+  const checkUserStatus = () => {
+    const userEmail = localStorage.getItem('userEmail')
+    setIsUser(!!userEmail) // Set to true if userEmail exists (user is logged in)
+  }
 
   const checkAdminStatus = () => {
     const userEmail = localStorage.getItem('userEmail')
-    console.log('Stored User Email:', userEmail) // Debugging line
     setIsAdmin(userEmail === 'admin_test@gmail.com')
   }
 
@@ -61,8 +67,7 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
   const initialState = {
     name: '',
     genre: '',
-    img: '',
-    business: ''
+    img: ''
   }
 
   const [form, setForm] = useState(initialState)
@@ -90,16 +95,15 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
   }
 
   const handleEdit = (movieId) => {
+    setEditMode(true)
+    setFormButtonText('Edit Movie')
+    setEditMovieId(movieId)
     const editMovie = movies.find((movie) => movie.id === movieId)
     setForm({
       name: editMovie.name,
       genre: editMovie.genre,
-      img: editMovie.img,
-      business: editMovie.business
+      img: editMovie.img
     })
-    setEditMode(true)
-    setFormButtonText('Edit Movie')
-    setEditMovieId(movieId)
   }
 
   const handleDelete = async (id) => {
@@ -114,7 +118,7 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
   return (
     <div className="movies">
       <h2>Movies List</h2>
-      {isAdmin && (
+      {isUser && isAdmin && (
         <form className="MovieForm" onSubmit={handleSubmit}>
           <label htmlFor="name">Movie Name:</label>
           <input
@@ -136,14 +140,6 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
             type="text"
             onChange={handleChange}
             value={form.img}
-          />
-          <label htmlFor="business"></label>
-          <input
-            id="business"
-            name="business"
-            type="hidden"
-            onChange={handleChange}
-            value={form.business}
           />
           <button type="submit">{formButtonText}</button>
         </form>
