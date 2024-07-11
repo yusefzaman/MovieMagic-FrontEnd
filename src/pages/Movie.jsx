@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
+const Movie = ({ searchQuery, setGenres }) => {
   const [editMode, setEditMode] = useState(false)
   const [formButtonText, setFormButtonText] = useState('Add New Movie')
   const [editMovieId, setEditMovieId] = useState(null)
   const [movies, setMovies] = useState([])
   const [isAdmin, setIsAdmin] = useState(false)
   const [isUser, setIsUser] = useState(false) // Track if the user is logged in
+  const [selectedGenres, setSelectedGenres] = useState([]) // State to manage selected genres
 
   useEffect(() => {
     checkUserStatus()
@@ -38,7 +39,7 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
       const uniqueGenres = [
         ...new Set(response.data.flatMap((movie) => movie.genre.split(', ')))
       ]
-      setGenres(uniqueGenres)
+      setGenres(uniqueGenres) // Update genres using setGenres
     } catch (error) {
       console.error('Error fetching data:', error)
     }
@@ -115,6 +116,14 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
     }
   }
 
+  const toggleGenre = (genre) => {
+    setSelectedGenres((prevSelectedGenres) =>
+      prevSelectedGenres.includes(genre)
+        ? prevSelectedGenres.filter((g) => g !== genre)
+        : [...prevSelectedGenres, genre]
+    )
+  }
+
   return (
     <div className="movies">
       <h2>Movies List</h2>
@@ -144,6 +153,24 @@ const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
           <button type="submit">{formButtonText}</button>
         </form>
       )}
+
+      <div className="genre-filter">
+        <h3>Filter by Genre:</h3>
+
+        {setGenres &&
+          setGenres.map &&
+          setGenres.map((genre) => (
+            <label key={genre}>
+              <input
+                type="checkbox"
+                value={genre}
+                onChange={() => toggleGenre(genre)}
+                checked={selectedGenres.includes(genre)}
+              />{' '}
+              {genre}
+            </label>
+          ))}
+      </div>
 
       <section className="container-grid">
         {filterMovies().map((movie) => (
