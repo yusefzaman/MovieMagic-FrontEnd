@@ -524,7 +524,4 @@ ul {
 .register-box button:hover {
   background-color: #0056b3;
 }
-input::marker {
-  background-color: royalblue;
-  transition: 1.5s;
-}
+

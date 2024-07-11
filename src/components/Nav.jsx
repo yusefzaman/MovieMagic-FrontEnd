@@ -7,21 +7,21 @@ const Nav = ({
   handleSearchChange,
   genres,
   selectedGenres,
-  handleGenreChange,
-  isLoggedIn,
-  setIsLoggedIn
+  handleGenreChange
 }) => {
   const navigate = useNavigate()
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'))
 
   useEffect(() => {
+    // Check if token exists in localStorage and update isLoggedIn state
     const token = localStorage.getItem('token')
     setIsLoggedIn(!!token)
-  }, [setIsLoggedIn])
+  }, [])
 
   const handleSignOut = () => {
     localStorage.removeItem('token')
-    setIsLoggedIn(false)
-    navigate('/')
+    setIsLoggedIn(false) // Update isLoggedIn state immediately
+    navigate('/') // Navigate to home page after signing out
   }
 
   return (

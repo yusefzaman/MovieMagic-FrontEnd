@@ -36,8 +36,6 @@ const App = () => {
     <div className="App">
       <div className="space"></div>
       <Nav
-        isLoggedIn={isLoggedIn}
-        setIsLoggedIn={setIsLoggedIn}
         searchQuery={searchQuery}
         handleSearchChange={handleSearchChange}
         genres={genres}
@@ -68,10 +66,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<Login />} />
 
-          <Route
-            path="/signout"
-            element={<SignOut setIsLoggedIn={setIsLoggedIn} />}
-          />
+          <Route path="/signout" element={<SignOut />} />
         </Routes>
       </main>
     </div>
