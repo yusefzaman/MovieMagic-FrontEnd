@@ -21,6 +21,7 @@ const SearchBar = ({
               value={genre}
               checked={selectedGenres.includes(genre)}
               onChange={handleGenreChange}
+              className="checkBoxes"
             />
             {genre}
           </label>

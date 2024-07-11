@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+
 import { useParams, useNavigate } from 'react-router-dom'
+
 
 const ShowTime = () => {
   const { movieName, id } = useParams()
