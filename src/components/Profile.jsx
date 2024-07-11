@@ -4,7 +4,6 @@ import axios from 'axios'
 const Profile = () => {
   const [user, setUser] = useState(null)
 
-  // Function to fetch user details from the backend
   const fetchUserDetails = async () => {
     const token = localStorage.getItem('token')
     try {
@@ -16,19 +15,21 @@ const Profile = () => {
           }
         }
       )
-      return response.data // Return user data from the response
+      return response.data
     } catch (error) {
       console.error('Error fetching user details:', error)
       return null
     }
   }
 
-  // Function to update user admin status
   const makeAdmin = async () => {
     const token = localStorage.getItem('token')
+    const userEmail = user.email.trim() // Trim the email
+
     try {
+      const url = `http://localhost:5000/users/${encodeURIComponent(userEmail)}` // Ensure email is properly encoded
       const response = await axios.put(
-        `http://127.0.0.1:5000/users/${user.id}`,
+        url,
         { admin: true },
         {
           headers: {
@@ -38,17 +39,28 @@ const Profile = () => {
       )
       setUser(response.data) // Update user data after admin status update
     } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        console.error('Server Error Status:', error.response.status)
+        console.error('Server Error Data:', error.response.data)
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('No response received:', error.request)
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.error('Request setup error:', error.message)
+      }
       console.error('Error updating admin status:', error)
     }
   }
-
-  // Fetch user details and set state on component mount
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
       fetchUserDetails().then((userData) => {
         setUser(userData)
       })
+    } else {
+      setUser(null)
     }
   }, [])
 

@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-const Movie = ({ searchQuery, selectedGenres, setGenres, user }) => {
+const Movie = ({ searchQuery, selectedGenres, setGenres }) => {
   const [editMode, setEditMode] = useState(false)
   const [formButtonText, setFormButtonText] = useState('Add New Movie')
   const [editMovieId, setEditMovieId] = useState(null)
-
   const [movies, setMovies] = useState([])
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
+    checkAdminStatus()
     getMovies()
   }, [])
 
@@ -17,10 +18,15 @@ const Movie = ({ searchQuery, selectedGenres, setGenres, user }) => {
     filterMovies()
   }, [searchQuery, selectedGenres])
 
+  const checkAdminStatus = () => {
+    const userEmail = localStorage.getItem('userEmail')
+    console.log('Stored User Email:', userEmail) // Debugging line
+    setIsAdmin(userEmail === 'admin_test@gmail.com')
+  }
+
   const getMovies = async () => {
     try {
       const response = await axios.get('http://127.0.0.1:5000/movies')
-      console.log(response.data)
       setMovies(response.data)
 
       const uniqueGenres = [
@@ -55,7 +61,8 @@ const Movie = ({ searchQuery, selectedGenres, setGenres, user }) => {
   const initialState = {
     name: '',
     genre: '',
-    img: ''
+    img: '',
+    business: ''
   }
 
   const [form, setForm] = useState(initialState)
@@ -74,21 +81,21 @@ const Movie = ({ searchQuery, selectedGenres, setGenres, user }) => {
       }
       setForm(initialState)
       setEditMode(false)
-      setFormButtonText('Add Movie')
+      setFormButtonText('Add New Movie')
       setEditMovieId(null)
       getMovies()
     } catch (error) {
-      console.error('Error creating movie:', error)
+      console.error('Error creating/updating movie:', error)
     }
   }
 
   const handleEdit = (movieId) => {
-    const Edit = movies.find((movie) => movie._id === movieId)
+    const editMovie = movies.find((movie) => movie.id === movieId)
     setForm({
-      name: Edit.name,
-      genre: Edit.genre,
-      img: Edit.img,
-      business: Edit.business
+      name: editMovie.name,
+      genre: editMovie.genre,
+      img: editMovie.img,
+      business: editMovie.business
     })
     setEditMode(true)
     setFormButtonText('Edit Movie')
@@ -107,7 +114,7 @@ const Movie = ({ searchQuery, selectedGenres, setGenres, user }) => {
   return (
     <div className="movies">
       <h2>Movies List</h2>
-      {user && user.admin && (
+      {isAdmin && (
         <form className="MovieForm" onSubmit={handleSubmit}>
           <label htmlFor="name">Movie Name:</label>
           <input
@@ -155,12 +162,10 @@ const Movie = ({ searchQuery, selectedGenres, setGenres, user }) => {
                   {genre}
                 </li>
               ))}
-              {user && user.admin && (
+              {isAdmin && (
                 <>
-                  <button onClick={() => handleEdit(movie._id)}>Edit</button>
-                  <button onClick={() => handleDelete(movie._id)}>
-                    Delete
-                  </button>
+                  <button onClick={() => handleEdit(movie.id)}>Edit</button>
+                  <button onClick={() => handleDelete(movie.id)}>Delete</button>
                 </>
               )}
             </ul>
