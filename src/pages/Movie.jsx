@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -81,16 +81,29 @@ const Movie = ({ searchQuery, setGenres }) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
+      const token = localStorage.getItem('token')
       if (editMode) {
-        await axios.put(`http://localhost:5000/edit_movie/${editMovieId}`, form)
+        await axios.put(
+          `http://localhost:5000/edit_movie/${editMovieId}`,
+          form,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
       } else {
-        await axios.post('http://localhost:5000/add_movie', form)
+        await axios.post('http://localhost:5000/add_movie', form, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
       }
       setForm(initialState)
       setEditMode(false)
       setFormButtonText('Add New Movie')
       setEditMovieId(null)
-      getMovies()
+      getMovies() // Refresh movie list after edit or add
     } catch (error) {
       console.error('Error creating/updating movie:', error)
     }
@@ -101,11 +114,15 @@ const Movie = ({ searchQuery, setGenres }) => {
     setFormButtonText('Edit Movie')
     setEditMovieId(movieId)
     const editMovie = movies.find((movie) => movie.id === movieId)
-    setForm({
-      name: editMovie.name,
-      genre: editMovie.genre,
-      img: editMovie.img
-    })
+    if (editMovie) {
+      setForm({
+        name: editMovie.name,
+        genre: editMovie.genre,
+        img: editMovie.img
+      })
+    } else {
+      console.error('Movie not found for editing')
+    }
   }
 
   const handleDelete = async (id) => {
