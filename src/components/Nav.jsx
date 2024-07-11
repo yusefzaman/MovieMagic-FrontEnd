@@ -7,7 +7,7 @@ const Nav = ({
   handleSearchChange,
   genres,
   selectedGenres,
-  handleGenreChange
+  handleGenreChange // Function to handle genre changes
 }) => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -70,7 +70,7 @@ const Nav = ({
             handleSearchChange={handleSearchChange}
             genres={genres}
             selectedGenres={selectedGenres}
-            handleGenreChange={handleGenreChange}
+            handleGenreChange={handleGenreChange} // Pass handleGenreChange to SearchBar
           />
         )}
       </nav>
