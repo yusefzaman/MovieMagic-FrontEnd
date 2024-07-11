@@ -93,6 +93,12 @@ const Movie = ({ searchQuery, setGenres }) => {
           }
         )
       } else {
+        // Validate form fields before submitting
+        if (!form.name || !form.img || !form.genre) {
+          console.error('Missing required fields')
+          return
+        }
+
         await axios.post('http://localhost:5000/add_movie', form, {
           headers: {
             Authorization: `Bearer ${token}`
