@@ -74,7 +74,7 @@ const Profile = () => {
           <h2 className="profile-info">
             Status: {user.admin ? 'Admin' : 'User'}
           </h2>
-          {!user.admin && <button onClick={makeAdmin}>Make Admin</button>}
+          {/* {!user.admin && <button onClick={makeAdmin}>Make Admin</button>} */}
         </div>
       ) : (
         <p className="profile-message">User Not Logged In</p>
