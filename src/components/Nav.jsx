@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import SearchBar from './SearchBar'
 
@@ -10,6 +10,7 @@ const Nav = ({
   handleGenreChange
 }) => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'))
 
   useEffect(() => {
@@ -23,6 +24,9 @@ const Nav = ({
     setIsLoggedIn(false) // Update isLoggedIn state immediately
     navigate('/') // Navigate to home page after signing out
   }
+
+  // Determine if SearchBar should be rendered based on the current route
+  const showSearchBar = location.pathname === '/movies'
 
   return (
     <header>
@@ -59,14 +63,17 @@ const Nav = ({
             </>
           )}
         </div>
+        {/* Conditionally render SearchBar only on the '/movies' page */}
+        {showSearchBar && (
+          <SearchBar
+            searchQuery={searchQuery}
+            handleSearchChange={handleSearchChange}
+            genres={genres}
+            selectedGenres={selectedGenres}
+            handleGenreChange={handleGenreChange}
+          />
+        )}
       </nav>
-      <SearchBar
-        searchQuery={searchQuery}
-        handleSearchChange={handleSearchChange}
-        genres={genres}
-        selectedGenres={selectedGenres}
-        handleGenreChange={handleGenreChange}
-      />
     </header>
   )
 }
