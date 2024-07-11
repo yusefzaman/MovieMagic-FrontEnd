@@ -9,7 +9,7 @@ const Movie = ({ searchQuery, setGenres }) => {
   const [movies, setMovies] = useState([])
   const [isAdmin, setIsAdmin] = useState(false)
   const [isUser, setIsUser] = useState(false) // Track if the user is logged in
-  const [selectedGenres, setSelectedGenres] = useState([]) // State to manage selected genres
+  const [selectedGenres, setSelectedGenres] = useState([]) // State for selected genres
 
   useEffect(() => {
     checkUserStatus()
@@ -39,7 +39,7 @@ const Movie = ({ searchQuery, setGenres }) => {
       const uniqueGenres = [
         ...new Set(response.data.flatMap((movie) => movie.genre.split(', ')))
       ]
-      setGenres(uniqueGenres) // Update genres using setGenres
+      setGenres(uniqueGenres)
     } catch (error) {
       console.error('Error fetching data:', error)
     }
@@ -54,6 +54,7 @@ const Movie = ({ searchQuery, setGenres }) => {
       )
     }
 
+    // Filter movies based on selected genres
     if (selectedGenres.length > 0) {
       filteredMovies = filteredMovies.filter((movie) =>
         movie.genre
@@ -109,19 +110,25 @@ const Movie = ({ searchQuery, setGenres }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/remove_movie/${id}`)
+      const token = localStorage.getItem('token') // Retrieve the token from localStorage
+      await axios.delete(`http://localhost:5000/remove_movie/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}` // Pass the token in the Authorization header
+        }
+      })
       getMovies()
     } catch (error) {
       console.error('Error deleting movie:', error)
     }
   }
 
-  const toggleGenre = (genre) => {
-    setSelectedGenres((prevSelectedGenres) =>
-      prevSelectedGenres.includes(genre)
-        ? prevSelectedGenres.filter((g) => g !== genre)
-        : [...prevSelectedGenres, genre]
-    )
+  const handleGenreChange = (genre) => {
+    // Toggle genre selection
+    if (selectedGenres.includes(genre)) {
+      setSelectedGenres(selectedGenres.filter((g) => g !== genre))
+    } else {
+      setSelectedGenres([...selectedGenres, genre])
+    }
   }
 
   return (
@@ -153,24 +160,6 @@ const Movie = ({ searchQuery, setGenres }) => {
           <button type="submit">{formButtonText}</button>
         </form>
       )}
-
-      <div className="genre-filter">
-        <h3>Filter by Genre:</h3>
-
-        {setGenres &&
-          setGenres.map &&
-          setGenres.map((genre) => (
-            <label key={genre}>
-              <input
-                type="checkbox"
-                value={genre}
-                onChange={() => toggleGenre(genre)}
-                checked={selectedGenres.includes(genre)}
-              />{' '}
-              {genre}
-            </label>
-          ))}
-      </div>
 
       <section className="container-grid">
         {filterMovies().map((movie) => (
