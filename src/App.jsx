@@ -73,6 +73,10 @@ const App = () => {
             path="/movies/:movieName/theatres/:id/Review"
             element={<ReviewForm />}
           />
+          <Route
+            path="movies/:movieName/theatres/:id/Reviews"
+            element={<ReviewList />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<Login />} />
 
