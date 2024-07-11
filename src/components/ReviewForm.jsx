@@ -1,32 +1,33 @@
-import React, { useState } from 'react';
-
+import React, { useState } from 'react'
+import axios from 'axios'
 const ReviewForm = ({ movieId, userId }) => {
-  const [content, setContent] = useState('');
-  const [rating, setRating] = useState('');
+  const [content, setContent] = useState('')
+  const [rating, setRating] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    localStorage.setItem('content', content)
+    localStorage.setItem('rating', rating)
+
     try {
-      const response = await fetch('/reviews', {
+      const response = await axios(' http://localhost:5000/reviews', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          // Add authorization headers if needed
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           content,
           rating,
           user_id: userId,
-          movie_id: movieId,
-        }),
-      });
-      const result = await response.json();
-      console.log(result); // Handle response as needed
+          movie_id: movieId
+        })
+      })
+      const result = await response.json()
+      console.log(result) // Handle response as needed
     } catch (error) {
-      console.error('Error submitting review:', error);
+      console.error('Error submitting review:', error)
     }
-  };
-
+  }
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -46,10 +47,10 @@ const ReviewForm = ({ movieId, userId }) => {
           required
         />
       </div>
+
       <button type="submit">Submit Review</button>
     </form>
-  );
-};
+  )
+}
 
-export default ReviewForm;
-
+export default ReviewForm
