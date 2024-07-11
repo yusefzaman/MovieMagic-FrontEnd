@@ -31,6 +31,12 @@ const App = () => {
         : [...prevGenres, genre]
     )
   }
+  const navigateToReview = () => {
+    // Implement navigation logic here
+    console.log('Navigate to ReviewForm')
+    // Example of programmatically changing the URL
+    // history.push(`/movies/${movieName}/theatres/${id}/Review`);
+  }
 
   return (
     <div className="App">
@@ -60,8 +66,12 @@ const App = () => {
           />
           <Route path="movies/:movieName/theatres" element={<Theatre />} />
           <Route
-            path="movies/:movieName/theatres/:id/Seats"
-            element={<ShowTime />}
+            path="/movies/:movieName/theatres/:id/Seats"
+            element={<ShowTime navigateToReview={navigateToReview} />}
+          />
+          <Route
+            path="/movies/:movieName/theatres/:id/Review"
+            element={<ReviewForm />}
           />
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<Login />} />
